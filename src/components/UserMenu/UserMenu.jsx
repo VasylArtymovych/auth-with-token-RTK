@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { authSelectors, authOperations } from 'redux/auth';
+import { useSelector } from 'react-redux';
+import { authSelectors } from 'redux/auth';
 import { useLogOutMutation } from 'redux/auth/authAPI';
 import avatar from '../../images/user-avatar.jpeg';
 
