@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Container, Title } from './PhoneBook.styled';
 import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactLIst';
@@ -7,15 +5,11 @@ import Filter from 'components/Filter';
 import { Box } from 'components/Box/Box';
 import Spinner from 'components/Spinner';
 import { useContacts } from 'hooks';
-import { contactsOperations } from 'redux/contacts';
+import { useGetContactsQuery } from 'redux/contacts/contactsAPI';
 
 const PhoneBook = () => {
-  const dispatch = useDispatch();
   const { contacts, filter, loader, setFilter } = useContacts();
-
-  useEffect(() => {
-    dispatch(contactsOperations.getContacts());
-  }, [dispatch]);
+  useGetContactsQuery();
 
   const handleFilterInput = event => {
     const { value } = event.target;

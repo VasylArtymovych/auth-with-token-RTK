@@ -4,13 +4,19 @@ import { Item, Button } from './ContactListItem.styled';
 import { useContacts } from 'hooks';
 import { Box } from 'components/Box/Box';
 import Swal from 'sweetalert2';
+import {
+  useDeleteContactMutation,
+  useUpdateContactMutation,
+} from 'redux/contacts';
 
 const ContactListItem = ({ id, name, number }) => {
   const [currentId, setCurrentId] = useState(null);
   const [editedName, setEditedName] = useState(name);
   const [editedNumber, setEditedNumber] = useState(number);
   const [isEdited, setIsEdited] = useState(false);
-  const { contacts, loader, deleteContact, editContact } = useContacts();
+  const { contacts, loader } = useContacts();
+  const [deleteContact] = useDeleteContactMutation();
+  const [updateContact] = useUpdateContactMutation();
 
   const onChangeHandler = e => {
     const { name, value } = e.target;
@@ -37,10 +43,10 @@ const ContactListItem = ({ id, name, number }) => {
             contact.id !== id
         )
       ) {
-        Swal.fire(`Name ${editedName} exist`);
+        Swal.fire(`Name ${editedName} exists`);
         return;
       }
-      editContact({ id, name: editedName, number: editedNumber });
+      updateContact({ id, name: editedName, number: editedNumber });
     }
     setIsEdited(state => !state);
   };

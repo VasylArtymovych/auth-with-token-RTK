@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 import { Form, Label, Input, Button } from './ContactForm.styled';
 import { useContacts } from 'hooks';
 import parsePhoneNumber from 'libphonenumber-js';
+import { useAddContactMutation } from 'redux/contacts';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
+  const [addContact] = useAddContactMutation();
   const inputNameId = nanoid(12);
   const inputNumberId = nanoid(12);
-  const { contacts, addLoader, addContact } = useContacts();
+  const { contacts, addLoader } = useContacts();
 
   const inputChangeHandler = event => {
     const { name, value } = event.target;
@@ -84,10 +84,6 @@ const ContactForm = () => {
       </Button>
     </Form>
   );
-};
-
-ContactForm.propTypes = {
-  dispatch: PropTypes.func,
 };
 
 export default ContactForm;

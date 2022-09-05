@@ -6,14 +6,9 @@ import UserMenu from 'components/UserMenu';
 import { authSelectors } from 'redux/auth';
 import routesPath from 'routesPath';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import Spinner from 'components/Spinner';
 
 export default function Header() {
   const isLoggedIn = useSelector(authSelectors.getIsloggedIn);
-  const isFetchingCurrentUser = useSelector(
-    authSelectors.getIsFetchingCurrentUser
-  );
-
   const location = useLocation();
   const isHomePath = location.pathname === '/';
 
@@ -30,13 +25,7 @@ export default function Header() {
           {isHomePath && isLoggedIn && (
             <NavLink to={routesPath.contacts}>Back to ContactBook</NavLink>
           )}
-          {isFetchingCurrentUser ? (
-            Spinner.threeDots
-          ) : isLoggedIn ? (
-            <UserMenu />
-          ) : (
-            <AuthNavigation />
-          )}
+          {isLoggedIn ? <UserMenu /> : <AuthNavigation />}
         </Container>
       </StyledHeader>
 

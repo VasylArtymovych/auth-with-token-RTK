@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const authApi = createApi({
+export const authAPI = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://connections-api.herokuapp.com/users',
@@ -36,10 +36,7 @@ export const authApi = createApi({
       }),
     }),
     fetchCurrentUser: builder.query({
-      query: () => ({
-        url: '/current',
-        method: 'GET',
-      }),
+      query: () => '/current',
     }),
   }),
 });
@@ -49,4 +46,4 @@ export const {
   useLoginMutation,
   useLogOutMutation,
   useFetchCurrentUserQuery,
-} = authApi;
+} = authAPI;
